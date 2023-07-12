@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div id="main-container">
+        <div id="left-zone">
+            <form method="POST">
+                <textarea id="input-text" name="input-text" rows="10" cols="50">{{ input_text }}</textarea>
+                <button id="post-button" type="submit">Post</button>
+            </form>
+        </div>
+        <div id="right-zone">
+            <textarea id="output-text" rows="10" cols="50" readonly>{{ translation }}</textarea>
+        </div>
+    </div>
+</body>
+</html>
