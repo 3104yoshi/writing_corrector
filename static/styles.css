@@ -1,18 +1,61 @@
-#main-container {
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #d7cadb;
+    font-family: Arial, sans-serif;
+}
+
+.main-container {
     display: flex;
     justify-content: space-between;
+    width: 80%;
+    height: 80%;
+    box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.1);
+    background-color: white;
+    border-radius: 5px;
+    padding: 2em;
+    box-sizing: border-box;
 }
 
-#left-zone, #right-zone {
+.zone {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 45%;
+    height: 100%;
 }
 
-textarea {
+.input-output {
     width: 100%;
-    height: 200px;
+    flex-grow: 1; /* Added this to make the textarea grow */
+    resize: none;
+    padding: 1em;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    margin-bottom: 1em; /* Add a little space before the button */
 }
 
-button {
-    display: block;
-    margin-top: 20px;
+.form {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Added this to make the form grow */
+}
+
+.post-button {
+    padding: 1em;
+    border: none;
+    border-radius: 5px;
+    background-color: #4caf50;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 1em; /* Add a little space after the textarea */
+}
+.post-button:hover {
+    background-color: #45a049;
 }

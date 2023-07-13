@@ -4,15 +4,15 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div id="main-container">
-        <div id="left-zone">
-            <form method="POST">
-                <textarea id="input-text" name="input-text" rows="10" cols="50">{{ input_text }}</textarea>
-                <button id="post-button" type="submit">Post</button>
+    <div class="main-container">
+        <div class="zone">
+            <form class="form" method="POST">
+                <textarea class="input-output" name="input-text" rows="10" cols="50">{{ input_text }}</textarea>
+                <button class="post-button" type="submit">translate</button>
             </form>
         </div>
-        <div id="right-zone">
-            <textarea id="output-text" rows="10" cols="50" readonly>{{ translation }}</textarea>
+        <div class="zone">
+            <textarea class="input-output" rows="10" cols="50" readonly>{{ translation }}</textarea>
         </div>
     </div>
 </body>
