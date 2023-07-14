@@ -28,7 +28,7 @@ body {
     height: 100%;
 }
 
-.input-output {
+.input,.output {
     width: 100%;
     flex-grow: 1; /* Added this to make the textarea grow */
     resize: none;

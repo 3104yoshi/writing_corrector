@@ -2,17 +2,39 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('.form');
+        const output = document.querySelector('.output');
+        let timeout = null;
+
+        form.querySelector('textarea').addEventListener('input', function() {
+            clearTimeout(timeout);  // Clear the previous timeout
+
+            timeout = setTimeout(function() {
+                fetch('/translation_auto', {
+                    method: 'POST',
+                    body: new FormData(form),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    output.value = data.translation;
+                });
+            }, 1000);  // Set the delay to 1 second (1000 milliseconds)
+        });
+    });
+    </script>
 </head>
 <body>
     <div class="main-container">
         <div class="zone">
             <form class="form" method="POST">
-                <textarea class="input-output" name="input-text" rows="10" cols="50">{{ input_text }}</textarea>
+                <textarea class="input" name="input-text" rows="10" cols="50">{{ input_text }}</textarea>
                 <button class="post-button" type="submit">translate</button>
             </form>
         </div>
         <div class="zone">
-            <textarea class="input-output" rows="10" cols="50" readonly>{{ translation }}</textarea>
+            <textarea class="output" rows="10" cols="50" readonly>{{ translation }}</textarea>
         </div>
     </div>
 </body>
