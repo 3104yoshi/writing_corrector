@@ -1,5 +1,6 @@
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -22,10 +23,14 @@ body {
 
 .zone {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    flex-direction: row;
+    justify-content: flex-start; /* Change to flex-start to align elements at the top */
     width: 45%;
     height: 100%;
+}
+
+.commentary {
+    margin-top: 1em; /* Add space between the form/output and the commentary textarea */
 }
 
 .input,.output {

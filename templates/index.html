@@ -9,7 +9,7 @@
         let timeout = null;
 
         form.querySelector('textarea').addEventListener('input', function() {
-            clearTimeout(timeout);  // Clear the previous timeout
+            clearTimeout(timeout);
 
             timeout = setTimeout(function() {
                 fetch('/translation_auto', {
@@ -20,7 +20,7 @@
                 .then(data => {
                     output.value = data.translation;
                 });
-            }, 1000);  // Set the delay to 1 second (1000 milliseconds)
+            }, 1000);
         });
     });
     </script>
@@ -30,11 +30,19 @@
         <div class="zone">
             <form class="form" method="POST">
                 <textarea class="input" name="input-text" rows="10" cols="50">{{ input_text }}</textarea>
-                <button class="post-button" type="submit">translate</button>
             </form>
         </div>
         <div class="zone">
-            <textarea class="output" rows="10" cols="50" readonly>{{ translation }}</textarea>
+            <form action="/correction" class="form" method="POST">
+                <textarea class="output" name="translation" rows="10" cols="50">{{ translation }}</textarea>
+                <textarea class="self-writing" name="self-translation" rows="10" cols="50">{{ self_translation }}</textarea>
+                <button class="post-button" type="submit">correction</button>
+            </form>
+        </div>
+    </div>
+    <div class="main-container">
+        <div class="zone">
+            <textarea class="correction" readonly>{{ correction }}</textarea>
         </div>
     </div>
 </body>
