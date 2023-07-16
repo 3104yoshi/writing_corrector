@@ -2,9 +2,31 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="main-container">
+        <div class="zone" id="input_area">
+            <form class="form_input" method="POST">
+                <textarea class="input" name="input-text" rows="10" cols="50" placeholder="日本語">{{ input_text }}</textarea>
+            </form>
+        </div>
+        <div class="zone" id="output_area">
+            <form class="form_output" method="POST">
+                <textarea class="output" name="translation" rows="10" cols="50" placeholder="自動翻訳">{{ translation }}</textarea>
+                <textarea class="self-writing" name="self-translation" rows="10" cols="50" placeholder="あなたの翻訳">{{ self_translation }}</textarea>
+                <button class="post-button" type="submit">翻訳比較</button>
+            </form>
+        </div>
+    </div>
+    <div class="main-container">
+        <div class="correction-zone">
+            <textarea class="correction" placeholder="翻訳結果の比較">{{ correction }}</textarea>
+        </div>
+    </div>
+
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const form = document.querySelector('.form');
+        const form = document.querySelector('.form_input');
         const output = document.querySelector('.output');
         let timeout = null;
 
@@ -22,28 +44,22 @@
                 });
             }, 1000);
         });
+
+        const correction = document.querySelector('.correction');
+        const form_output = document.querySelector('.form_output');
+        document.querySelector('.post-button').addEventListener('click', function(e) {
+            e.preventDefault(); // prevent the form from submitting normally
+            fetch('/correction-api', {
+                method: 'POST',
+                body: new FormData(form_output),
+            })
+            .then(response => response.json())
+            .then(data => {
+                correction.value = data.correction;
+            })
+            .catch(error => console.error('Error:', error));
+        });
     });
     </script>
-</head>
-<body>
-    <div class="main-container">
-        <div class="zone">
-            <form class="form" method="POST">
-                <textarea class="input" name="input-text" rows="10" cols="50">{{ input_text }}</textarea>
-            </form>
-        </div>
-        <div class="zone">
-            <form action="/correction" class="form" method="POST">
-                <textarea class="output" name="translation" rows="10" cols="50">{{ translation }}</textarea>
-                <textarea class="self-writing" name="self-translation" rows="10" cols="50">{{ self_translation }}</textarea>
-                <button class="post-button" type="submit">correction</button>
-            </form>
-        </div>
-    </div>
-    <div class="main-container">
-        <div class="zone">
-            <textarea class="correction" readonly>{{ correction }}</textarea>
-        </div>
-    </div>
 </body>
 </html>
